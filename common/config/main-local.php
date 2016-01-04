@@ -1,9 +1,9 @@
 <?php
 return [
     'components' => [
-        'language' => 'zh-CN', // ÆôÓÃ¹ú¼Ê»¯Ö§³Ö
-        'sourceLanguage' => 'zh-CN', // Ô´´úÂë²ÉÓÃÖÐÎÄ
-        'timeZone' => 'Asia/Shanghai', // ÉèÖÃÊ±Çø
+        'language' => 'zh-CN', // å¯ç”¨å›½é™…åŒ–æ”¯æŒ
+        'sourceLanguage' => 'zh-CN', // æºä»£ç é‡‡ç”¨ä¸­æ–‡
+        'timeZone' => 'Asia/Shanghai', // è®¾ç½®æ—¶åŒº
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
@@ -21,9 +21,9 @@ return [
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'showScriptName' => false,//Òþ²Øindex.php
+            'showScriptName' => false,//éšè—index.php
             //'enableStrictParsing' => false,
-            //'suffix' => '.html',//ºó×º£¬Èç¹ûÉèÖÃÁË´ËÏî£¬ÄÇÃ´ä¯ÀÀÆ÷µØÖ·À¸¾Í±ØÐë´øÉÏ.htmlºó×º£¬·ñÔò»á±¨404´íÎó
+            //'suffix' => '.html',//åŽç¼€ï¼Œå¦‚æžœè®¾ç½®äº†æ­¤é¡¹ï¼Œé‚£ä¹ˆæµè§ˆå™¨åœ°å€æ å°±å¿…é¡»å¸¦ä¸Š.htmlåŽç¼€ï¼Œå¦åˆ™ä¼šæŠ¥404é”™è¯¯
             'rules' => [
                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
             ],
