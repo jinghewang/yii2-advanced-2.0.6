@@ -1,4 +1,4 @@
 <?php
 return [
-    'app' => ['name' => 'Backend Electronic Contract']
+    'app' => ['name' => 'Electronic Contract Backend']
 ];
