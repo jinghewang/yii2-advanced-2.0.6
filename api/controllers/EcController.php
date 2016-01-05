@@ -3,8 +3,10 @@ namespace api\controllers;
 
 use api\models\AccessToken;
 use api\services\AjaxStatus;
+use common\helpers\DataHelper;
 use Yii;
 use api\services\AccessTokenService;
+use yii\filters\VerbFilter;
 
 
 /**
@@ -16,11 +18,23 @@ use api\services\AccessTokenService;
 class EcController extends BaseController
 {
 
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                    'save' => ['post','get'],
+                ],
+            ],
+        ];
+    }
 
     /**
      * 登录
      */
-    public function actionLogin($clientid,$appkey)
+    public function actionLogin($appkey,$clientid,$client_secret)
     {
         $map = self::getRestMap();
         try {
@@ -66,36 +80,14 @@ class EcController extends BaseController
 
             $data=null;
 
-            if (isset($_POST['order'])) {
-                $data = $_POST['order'];
-            }
+            //var_dump($_REQUEST['name']);
+            //$data = SnapshotHelper::decodeToArray($data);
+            //DebugService::Log('API下单',BJSON::encode($data));
 
-            if (is_null($data)) {
-                throw new Exception('order is null!!!');
-            }
-
-            $data = SnapshotHelper::decodeToArray($data);
-            DebugService::Log('API下单',BJSON::encode($data));
-
-            $data = $data['order'];
-            $apiOrderForm = new ApiOrderForm();
-            $apiOrderForm->gid = $data['gid'];
-            $apiOrderForm->oid = $data['oid'];
-            $apiOrderForm->pgid = $data['pgid'];
-            $apiOrderForm->status = Order::STATUS_ORDER;
-            $apiOrderForm->num = $data['num'];
-            $apiOrderForm->create_datetime = $data['create_datetime'];
-            $apiOrderForm->departure_date = $data['departure_date'];
-            $apiOrderForm->orgid = $data['orgid'];
-            $apiOrderForm->order_orgid = BDataHelper::getHltConfig('btg_orgid');
-            $apiOrderForm->order_userid = BDataHelper::getHltConfig('btg_userid');
-            $apiOrderForm->stocks = $data['stocks'];
-            $apiOrderForm->ordermembers = $data['ordermembers'];
-
-            $apiOrderForm->save();
             $map[AjaxStatus::PROPERTY_MESSAGES] = "业务处理成功";
             $map[AjaxStatus::PROPERTY_STATUS] = AjaxStatus::STATUS_SUCCESSFUL;
             $map[AjaxStatus::PROPERTY_CODE] = AjaxStatus::CODE_OK;
+            $map[AjaxStatus::PROPERTY_DATA] = array('oid'=>'1122121','name'=>DataHelper::getRequestParam('name'));
 
         } catch (IllegalArgumentException $e) {
             $map[AjaxStatus::PROPERTY_STATUS] = AjaxStatus::STATUS_FAILED;
@@ -106,7 +98,7 @@ class EcController extends BaseController
             $map[AjaxStatus::PROPERTY_CODE] = AjaxStatus::CODE_503;
             $map[AjaxStatus::PROPERTY_MESSAGES] = $e->getMessage();
         }
-        echo SnapshotHelper::encodeArray($map);
+        echo json_encode($map);
     }
 
     /**

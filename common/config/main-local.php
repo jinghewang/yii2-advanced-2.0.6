@@ -4,6 +4,9 @@ return [
     'sourceLanguage' => 'zh-CN', // 源代码采用中文
     'timeZone' => 'Asia/Shanghai', // 设置时区
     'components' => [
+        'request'=>array(
+            'enableCsrfValidation'=>false,
+        ),
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=yii2advanced',

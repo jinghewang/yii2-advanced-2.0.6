@@ -91,12 +91,12 @@ class AccessTokenService
         $clientid = $request->queryParams[self::CLIENTID_PARAM_KEY];
         $tokenid = $request->queryParams[self::TOKEN_PARAM_KEY];
         Assert::hasText($clientid, "传入参数有误");
-        $cacheToken = self::getToken($clientid);
+        $cacheToken = self::getToken($tokenid,$clientid);
         if ($cacheToken == null)
-            throw new ValidateException("权限已过期，请重新获取权限");
+            throw new Exception("权限已过期，请重新获取权限");
 
         if ($cacheToken->tokenid != $tokenid)
-            throw new ValidateException("tokenid 验证失败");
+            throw new Exception("tokenid 验证失败");
 
         /*$model = User::model()->findByPk(BDataHelper::getHltConfig('btg_userid'));
         $_identity = new UserIdentity($model->loginname, $model->password);
@@ -110,9 +110,9 @@ class AccessTokenService
         return $cacheToken;
     }
 
-    public static function getToken($clientid)
+    public static function getToken($tokenid,$clientid)
     {
-        $token = AccessToken::findOne(array('clientid'=>$clientid));
+        $token = AccessToken::findOne(array('clientid'=>$clientid,'tokenid'=>$tokenid));
         return $token;
     }
 

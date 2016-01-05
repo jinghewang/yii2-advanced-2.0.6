@@ -34,8 +34,8 @@ class AccessTokenTestController extends Controller
      */
     public function actionLogin()
     {
-        $url = 'http://api.ec.com/ec/login?clientid=1&appkey=3332';
-        $result = NetHelper::httpRequestSimple($url);
+        $url = 'http://api.ec.com/ec/login?appkey=hlt2014api&clientid=YXA63VpnwIszEeSjZqcGJBng8Q&client_secret=YXA6IfChK92QC5gW_zhIy0BWNMjvTKo';
+        $result = NetHelper::curl_post($url,array(),'string');
         $result = json_decode($result);
 
         if ($result && $result->status && $result->status == 'successful'){
@@ -57,6 +57,28 @@ class AccessTokenTestController extends Controller
     public function actionLoginToken()
     {
        var_dump(Yii::$app->session->get('token'));
+    }
+
+
+    /**
+     * Lists all Country models.
+     * @return mixed
+     */
+    public function actionSave()
+    {
+        $url = 'http://api.ec.com/ec/save?tokenid=49whfwmzh4&appkey=hlt2014api&clientid=YXA63VpnwIszEeSjZqcGJBng8Q';
+        $data = ['name'=>'wjh','age'=>19];
+        $result = NetHelper::curl_post($url,$data,'string');
+        $result = json_decode($result);
+        if ($result && $result->status && $result->status == 'successful'){
+            var_dump($result->data);
+            //Yii::$app->session->set('token',$result->data);
+            //Yii::$app->session->set($result->data->tokenid,$result->data);
+        }
+        else{
+            var_dump('操作失败，原因 ：'.$result->message);
+        }
+        /*echo $result;*/
     }
 
     /**
