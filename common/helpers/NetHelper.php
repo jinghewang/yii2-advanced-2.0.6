@@ -162,7 +162,11 @@ class NetHelper
             $method = 'POST';
 
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, strtoupper($method));
-        //$data = http_build_query($data); wjh 20150407 由于处理文件上传，取消此功能
+        $data = http_build_query($data); //wjh 20150407 由于处理文件上传，取消此功能
+
+        $headerSet = array('Content-Type: multipart/form-data');
+        //curl_setopt($ch, CURLOPT_HTTPHEADER,$headerSet);
+
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         $output=curl_exec($ch);
         curl_close($ch);
