@@ -48,7 +48,7 @@ class HtmlController extends Controller
         $htmlContent = $this->renderPartial('inside');//file_get_contents("D:/template/t2.htm");
         $pdf = Yii::$app->pdf;
         $pdf->content = $htmlContent;
-        $pdf->methods['SetHeader'] = '合同编号：T<span class="color-tno">00001</span>';
+        $pdf->methods['SetHeader'] = '合同编号T<span class="color-tno">00001</span>';
         $pdf->cssInline .= $css;
 
         return $pdf->render();
