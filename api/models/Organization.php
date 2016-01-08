@@ -2,6 +2,7 @@
 
 namespace api\models;
 
+use common\models\User;
 use Yii;
 
 /**
@@ -68,7 +69,7 @@ class Organization extends \yii\db\ActiveRecord
             'createuserid' => '创建人',
             'createtime' => '创建时间',
             'extra_data' => '暂定信息 营业地址 addr联系电话 tel传真 fax邮编 zip邮箱 mail',
-            'isdelete' => '是否删除',
+            'isdelete' => '状态',
         ];
     }
 
@@ -115,4 +116,14 @@ class Organization extends \yii\db\ActiveRecord
     public function getContracts(){
         return $this->hasMany(Contract::className(),['orgid'=>'orgid']);
     }
+
+    /**
+     * 获取组织创建人
+     * @method getUser
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser(){
+        return $this->hasOne(User::className(),['id'=>'createuserid']);
+    }
+
 }

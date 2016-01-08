@@ -12,13 +12,15 @@ use api\models\Organization;
  */
 class OrganizationSearch extends Organization
 {
+    public $username;
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['orgid', 'name', 'parentid', 'enname', 'vercode', 'seal', 'logo', 'teltext', 'createuserid', 'createtime', 'extra_data'], 'safe'],
+            [['orgid', 'name', 'parentid', 'enname', 'vercode', 'seal', 'logo', 'teltext', 'createuserid', 'createtime', 'extra_data','username'], 'safe'],
             [['lft', 'rgt', 'level', 'isdelete'], 'integer'],
         ];
     }
@@ -42,9 +44,12 @@ class OrganizationSearch extends Organization
     public function search($params)
     {
         $query = Organization::find();
-
+        $query->joinWith(['user']);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         $this->load($params);
@@ -55,24 +60,13 @@ class OrganizationSearch extends Organization
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'lft' => $this->lft,
-            'rgt' => $this->rgt,
-            'level' => $this->level,
-            'createtime' => $this->createtime,
+        $query->andFilterWhere(['like', 'name', $this->name])
+        ->andFilterWhere(['like', 'enname', $this->enname])
+        ->andFilterWhere(['like', 'createuserid', $this->createuserid])
+        ->andFilterWhere(['like', 'user.username', $this->username])
+        ->andFilterWhere([
             'isdelete' => $this->isdelete,
         ]);
-
-        $query->andFilterWhere(['like', 'orgid', $this->orgid])
-            ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'parentid', $this->parentid])
-            ->andFilterWhere(['like', 'enname', $this->enname])
-            ->andFilterWhere(['like', 'vercode', $this->vercode])
-            ->andFilterWhere(['like', 'seal', $this->seal])
-            ->andFilterWhere(['like', 'logo', $this->logo])
-            ->andFilterWhere(['like', 'teltext', $this->teltext])
-            ->andFilterWhere(['like', 'createuserid', $this->createuserid])
-            ->andFilterWhere(['like', 'extra_data', $this->extra_data]);
 
         return $dataProvider;
     }
