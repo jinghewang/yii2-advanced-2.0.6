@@ -1,13 +1,47 @@
 .container{ font-family: "宋体", "Arial", sans-serif}
 /*.container p{ text-indent: 2em;}*/
 .container>.row:first-child{ margin-top: 20px;}
-.container >.title{ margin-top: 100px;}
-.container >.company{ margin-top: 300px;}
-.container >.desctitle{ margin-top: 200px;}
-.container >.desc{ margin-top: 20px;}
+.container .title{ margin-top: 20%;}
+.container .company{ margin-top: 80%;}
+.container .desctitle{ margin-top: 200px;}
+.container .desc{ margin-top: 20px;}
 .list-none{ list-style-type: none; padding-left: 20px;}
 .font-heiti{ font-family:'微软雅黑', '黑体'; font-size: 1.3em; margin-top: 20px; margin-bottom: 10px;}
 .container ol li{line-height: 2em;}
 .container p{ margin-bottom: 0; line-height: 2em;}
 .container .file{ font-size: 1.3em; margin-top: 20px;}
 .container .col{ height: 30px; line-height: 30px;}
+
+
+.color-tno{
+    color: #0000cc;
+}
+
+.ec-page-after{
+    /*page-break-after: always*/
+}
+
+
+.ec-page-before{
+    page-break-before: always;
+}
+
+.ec-page-before{
+    page-break-before: always;
+}
+
+.rb-md-6{
+    width: 45%;
+    float: left;
+    /*border: 1px solid red;*/
+}
+
+.rb-table-bordered {
+    border: 1px solid #ddd;
+    /*color: red;*/
+}
+
+.rb-th,.rb-td{
+    /*color: red;*/
+    border: 1px solid #ddd;
+}

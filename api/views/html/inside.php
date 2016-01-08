@@ -17,7 +17,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title>神舟国内合同</title>
+    <title><!--神舟国内合同--></title>
     <?=Html::cssFile('@web/css/ec.css')?>
     <?php $this->head() ?>
 </head>
@@ -25,8 +25,8 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <div class="container">
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6"><h4>BTG-2016</h4></div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><h4>合同编号：<small>N1500001</small></h4></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 rb-md-6"><h4>BTG-2016</h4></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 text-right rb-md-6"><h4>合同编号：<small>N1500001</small></h4></div>
     </div>
     <div class="row title">
         <div class="text-center"><h2>境内旅游合同</h2></div>
@@ -34,7 +34,7 @@ AppAsset::register($this);
     <div class="row company">
         <div class="text-center"><h3>北京神舟国际旅行社集团有限公司</h3></div>
     </div>
-    <div class="row desctitle">
+    <div class="row desctitle ec-page-before">
         <div class="text-center"><h3>使用说明</h3></div>
     </div>
     <div class="row desc">
@@ -45,7 +45,7 @@ AppAsset::register($this);
             <li>本合同依照国家旅游局和国家工商行政管理总局示范文本制定。</li>
         </ol>
     </div>
-    <div class="row">
+    <div class="row ec-page-before">
         <div class="text-center"><h2>境内旅游合同</h2></div>
         <div>
             <p>
@@ -318,7 +318,7 @@ AppAsset::register($this);
     </div>
 
     <!--协议条款-->
-    <div class="row">
+    <div class="row ec-page-before">
         <div class="text-center font-heiti"><strong>第七章&emsp;协议条款</strong></div>
         <div>
             <p>第二十条&emsp;线路行程时间</p>
@@ -347,7 +347,7 @@ AppAsset::register($this);
                 </ol>
             </ol>
         </div>
-        <div>
+        <div class="">
             <p>第二十三条&emsp;成团人数与不成团的约定</p>
             <ol class="list-unstyled">
                 <li>成团的最低人数：<u>&emsp;</u>人。</li>
@@ -377,7 +377,7 @@ AppAsset::register($this);
                 <li>行程安排之外的购物活动、另行付费旅游项目双方需签订《自愿购物活动补充协议》、《自愿参加另行付费旅游项目补充协议》。</li>
             </ol>
         </div>
-        <div>
+        <div class="ec-page-before">
             <p>第二十六条&emsp;争议的解决方式</p>
             <p>本合同履行过程中发生争议，由双方协商解决，亦可向合同签订地的旅游质监执法机构、消费者协会、有关的调解组织等有关部门或者机构申请调解。协商或者调解不成的，依法向<u>北京市朝阳区人民法院</u>起诉。</p>
         </div>
@@ -397,116 +397,116 @@ AppAsset::register($this);
             <p>第二十八条&emsp;合同效力</p>
             <p>本合同一式贰份，双方各持壹份，具有同等法律效力，自双方当事人签字或者盖章之日起生效。</p>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     旅游者（或代表）签字（盖章）：
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     旅行社盖章：
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     证件号码：
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     签约代表签字（盖章）：
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     住&emsp;&emsp;址：
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     营业地址：
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     联系电话：
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     联系电话：
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     传&emsp;&emsp;真：
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     传&emsp;&emsp;真：
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     邮&emsp;&emsp;编：
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     邮&emsp;&emsp;编：
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     电子信箱：
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     电子信箱：
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     签约日期：　　       　年     　月　     日
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     签约日期：　　       　年     　月　     日
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     签约地点：
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
                     质量监督、投诉电话：<u> 4006276271 </u>
                 </div>
             </div>
         </div>
-        <div>
+        <div class="ec-page-before">
             <p class="file">附件1：</p>
             <div class="text-center font-heiti"><h3>旅行旅游报名表</h3></div>
             <p>旅游线路及编号　　　　                            　  　 出团时间　　　　　　</p>
             <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <th class="text-center">序号</th>
-                        <th class="text-center">性别</th>
-                        <th class="text-center">年龄</th>
-                        <th class="text-center">国籍</th>
-                        <th class="text-center">旅行证件号</th>
-                        <th class="text-center">身份证号</th>
-                        <th class="text-center">本人联系电话</th>
-                        <th class="text-center">紧急联系电话</th>
-                        <th class="text-center">身体状况</th>
-                    </thead>
+                <table class="table table-bordered rb-table-bordered">
+                    <tr>
+                        <td class="text-center rb-th">序号</td>
+                        <td class="text-center rb-th">性别</td>
+                        <td class="text-center rb-th">年龄</td>
+                        <td class="text-center rb-th">国籍</td>
+                        <td class="text-center rb-th">旅行证件号</td>
+                        <td class="text-center rb-th">身份证号</td>
+                        <td class="text-center rb-th">本人联系电话</td>
+                        <td class="text-center rb-th">紧急联系电话</td>
+                        <td class="text-center rb-th">身体状况</td>
+                    </tr>
                     <tbody>
                     <?php
                         for($i=1;$i<=8;$i++){
                     ?>
                         <tr>
-                            <td class="text-center"><?=$i?></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
+                            <td class="text-center rb-td"><?=$i?></td>
+                            <td class="text-center rb-td">&nbsp;</td>
+                            <td class="text-center rb-td">&nbsp;</td>
+                            <td class="text-center rb-td">&nbsp;</td>
+                            <td class="text-center rb-td">&nbsp;</td>
+                            <td class="text-center rb-td">&nbsp;</td>
+                            <td class="text-center rb-td">&nbsp;</td>
+                            <td class="text-center rb-td">&nbsp;</td>
+                            <td class="text-center rb-td">&nbsp;</td>
                         </tr>
                     <?php } ?>
                     <tr>
                         <td style="vertical-align: middle; " class="text-center">备<br>&emsp;<br>&emsp;<br>&emsp;<br>注</td>
-                        <td colspan="9" height="300">
+                        <td colspan="8" height="300">
                             <ol>
                                 <li><u>&emsp;&emsp;</u>号与<u>&emsp;&emsp;</u> 号一间房；<u>&emsp;&emsp;</u> 号与<u>&emsp;&emsp;</u> 号一间房；<u>&emsp;&emsp;</u> 号与<u>&emsp;&emsp;</u> 号一间房；<u>&emsp;&emsp;</u> 号与<u>&emsp;&emsp;</u> 号一间房；
                                     号为单男/单女需要安排与他人同住，<u>&emsp;&emsp;</u> 号不占床位，<u>&emsp;&emsp;</u> 号全程单住（同意补交房费差额）；
@@ -533,15 +533,15 @@ AppAsset::register($this);
                 </table>
             </div>
              <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6 rb-md-6">
                         旅游者(或代表)签字：
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                    <div class="col-xs-6 col-sm-6 col-md-6 text-right rb-md-6">
                         2016年01月07日
                     </div>
              </div>
         </div>
-        <div>
+        <div class="ec-page-before">
             <p class="file">附件2：</p>
             <div class="text-center font-heiti">
                 <div class="row">
