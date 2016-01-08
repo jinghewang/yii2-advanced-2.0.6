@@ -42,6 +42,27 @@ class SmartyTestController extends Controller
     }
 
     /**
+     * Lists all SmartyTest models.
+     * @return mixed
+     */
+    public function actionIndex2()
+    {
+        $searchModel = new SmartyTestSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $smarty = SmartyTest::find()->one();
+
+        $items = SmartyTest::find()->all();
+
+        return $this->render('index2.tpl', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'msg'=>'ssssd',
+            'model' => $smarty,
+            'items' => $items,
+        ]);
+    }
+
+    /**
      * Displays a single SmartyTest model.
      * @param integer $id
      * @return mixed

@@ -54,5 +54,36 @@ return [
                 // ...
             ],
         ],
+        'pdf' => [
+            'class' => kartik\mpdf\Pdf::classname(),
+            // set to use core fonts only
+            'mode' => kartik\mpdf\Pdf::MODE_UTF8,
+            // A4 paper format
+            'format' => kartik\mpdf\Pdf::FORMAT_A4,
+            // portrait orientation
+            'orientation' => kartik\mpdf\Pdf::ORIENT_LANDSCAPE,
+            // stream to browser inline
+            'destination' => kartik\mpdf\Pdf::DEST_BROWSER,
+            // your html content input
+            'content' => '你好，世界',
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+            'cssInline' => '.kv-heading-1{font-size:24px}',
+            // set mPDF properties on the fly
+            'options' => [
+                'title' => '中文',
+                'autoLangToFont' => true,    //这几个配置加上可以显示中文
+                'autoScriptToLang' => true,  //这几个配置加上可以显示中文
+                'autoVietnamese' => true,    //这几个配置加上可以显示中文
+                'autoArabic' => true,        //这几个配置加上可以显示中文
+            ],
+            // call mPDF methods on the fly
+            'methods' => [
+                'SetHeader' => ['中文'],
+                'SetFooter' => ['{PAGENO}'],
+            ]
+        ]
     ],
 ];

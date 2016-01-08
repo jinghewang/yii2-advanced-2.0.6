@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\helpers\NetHelper;
+use kartik\mpdf\Pdf;
 use Yii;
 use backend\models\Country;
 use backend\models\CountrySearch;
@@ -97,6 +98,23 @@ class TestController extends Controller
         $data = [];
         $result = NetHelper::curl_post($url,$data,'string',0,null,'HEAD');
         echo $result;
+    }
+
+    /**
+     * Lists all Country models.
+     * @return mixed
+     */
+    public function actionPdf()
+    {
+        /**
+         * @var Pdf $pdf
+         */
+        $htmlContent = file_get_contents("D:/template/t2.htm");
+        //$htmlContent = "psddsds";
+
+        $pdf = Yii::$app->pdf;
+        $pdf->content = $htmlContent;
+        return $pdf->render();
     }
 
     /**
