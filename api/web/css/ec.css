@@ -27,7 +27,11 @@
 }
 
 .ec-page-before{
-    page-break-before: always;
+    page-break-before: left;
+}
+
+.ec-page-before-auto{
+    page-break-before: auto;
 }
 
 .rb-md-6{
