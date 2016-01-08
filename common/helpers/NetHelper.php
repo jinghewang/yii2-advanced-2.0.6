@@ -147,19 +147,26 @@ class NetHelper
      * @param string $returnType json or string ,default json
      * @return string
      */
-    public static function curl_post($url,$data,$returnType='json',$header=0,$cookie=null){
+    public static function curl_post($url,$data,$returnType='json',$header=0,$cookie=null,$method=null){
         $ch = curl_init();
         if (!empty($cookie))
             curl_setopt($ch, CURLOPT_COOKIE, $cookie);//JSESSIONID=5649CCE3FA2B78DF08308516AC1A5FEB
 
         curl_setopt($ch, CURLOPT_TIMEOUT,60);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT,10);
-        //curl_setopt($ch, CURLOPT_PROXY, '127.0.0.1:8888'); //设置代理服务器
+        curl_setopt($ch, CURLOPT_PROXY, '127.0.0.1:8888'); //设置代理服务器
         curl_setopt($ch, CURLOPT_HEADER,$header);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        //$data = http_build_query($data); wjh 20150407 由于处理文件上传，取消此功能
+        if (empty($method))
+            $method = 'POST';
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, strtoupper($method));
+        $data = http_build_query($data); //wjh 20150407 由于处理文件上传，取消此功能
+
+        $headerSet = array('Content-Type: multipart/form-data');
+        //curl_setopt($ch, CURLOPT_HTTPHEADER,$headerSet);
+
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         $output=curl_exec($ch);
         curl_close($ch);
