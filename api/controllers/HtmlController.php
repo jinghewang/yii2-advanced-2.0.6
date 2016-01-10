@@ -38,7 +38,7 @@ class HtmlController extends Controller
      * Lists all AccessApp models.
      * @return mixed
      */
-    public function actionIndexPdf()
+    public function actionIndexPdf($down=false)
     {
         /**
          * @var Pdf $pdf
@@ -51,7 +51,14 @@ class HtmlController extends Controller
         $pdf->methods['SetHeader'] = '合同编号T<span class="color-tno">00001</span>';
         $pdf->cssInline .= $css;
 
-        return $pdf->render();
+        if (!$down)
+            return $pdf->render();
+        else{
+            //$pdf->output($htmlContent, '123.pdf');
+            //die;
+        }
+
+        //<pagebreak></pagebreak>
     }
 
     /**

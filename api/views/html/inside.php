@@ -5,6 +5,7 @@
  * Date: 16-1-7
  * Time: 上午9:37
  */
+use common\helpers\PdfHelper;
 use yii\helpers\Html;
 use api\assets\AppAsset;
 
@@ -34,7 +35,8 @@ AppAsset::register($this);
     <div class="row company">
         <div class="text-center"><h3>北京神舟国际旅行社集团有限公司</h3></div>
     </div>
-    <div class="row desctitle ec-page-before">
+    <?= PdfHelper::PAGE_BREAK ?>
+    <div class="row desctitle">
         <div class="text-center"><h3>使用说明</h3></div>
     </div>
     <div class="row desc">
@@ -45,7 +47,8 @@ AppAsset::register($this);
             <li>本合同依照国家旅游局和国家工商行政管理总局示范文本制定。</li>
         </ol>
     </div>
-    <div class="row ec-page-before">
+    <?= PdfHelper::PAGE_BREAK ?>
+    <div class="row">
         <div class="text-center"><h2>境内旅游合同</h2></div>
         <div>
             <p>
@@ -317,8 +320,9 @@ AppAsset::register($this);
         </div>
     </div>
 
+    <?= PdfHelper::PAGE_BREAK ?>
     <!--协议条款-->
-    <div class="row ec-page-before">
+    <div class="row">
         <div class="text-center font-heiti"><strong>第七章&emsp;协议条款</strong></div>
         <div>
             <p>第二十条&emsp;线路行程时间</p>
@@ -377,7 +381,8 @@ AppAsset::register($this);
                 <li>行程安排之外的购物活动、另行付费旅游项目双方需签订《自愿购物活动补充协议》、《自愿参加另行付费旅游项目补充协议》。</li>
             </ol>
         </div>
-        <div class="ec-page-before-auto">
+        <?= PdfHelper::PAGE_BREAK ?>
+        <div class="">
             <p>第二十六条&emsp;争议的解决方式</p>
             <p>本合同履行过程中发生争议，由双方协商解决，亦可向合同签订地的旅游质监执法机构、消费者协会、有关的调解组织等有关部门或者机构申请调解。协商或者调解不成的，依法向<u>北京市朝阳区人民法院</u>起诉。</p>
         </div>
@@ -471,7 +476,8 @@ AppAsset::register($this);
                 </div>
             </div>
         </div>
-        <div class="ec-page-before-auto">
+        <?= PdfHelper::PAGE_BREAK ?>
+        <div class="">
             <p class="file">附件1：</p>
             <div class="text-center font-heiti"><h3>旅行旅游报名表</h3></div>
             <p>旅游线路及编号　　　　                            　  　 出团时间　　　　　　</p>
@@ -524,7 +530,7 @@ AppAsset::register($this);
                                     若表格不够，请按照同等格式另附报名表；
                                 </li>
                                 <li>
-                                    其他补充说明：<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                                    其他补充说明：<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
                                 </li>
                             </ol>
                         </td>
@@ -541,7 +547,8 @@ AppAsset::register($this);
                     </div>
              </div>
         </div>
-        <div class="ec-page-before-auto">
+        <?= PdfHelper::PAGE_BREAK ?>
+        <div class="">
             <p class="file">附件2：</p>
             <div class="text-center font-heiti">
                 <div class="row">
