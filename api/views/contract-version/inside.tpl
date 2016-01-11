@@ -1,32 +1,6 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: huilai
- * Date: 16-1-7
- * Time: 上午9:37
- */
-use common\helpers\PdfHelper;
-use yii\helpers\Html;
-use api\assets\AppAsset;
-
-AppAsset::register($this);
-?>
-<?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
-    <title><!--神舟国内合同--></title>
-    <?=Html::cssFile('@web/css/ec.css')?>
-    <?php $this->head() ?>
-</head>
-<body>
-<?php $this->beginBody() ?>
 <div class="container">
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6 rb-md-6"><h4>BTG-2016</h4></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 rb-md-6"><h4>BTG-2016-2</h4></div>
         <div class="col-xs-6 col-sm-6 col-md-6 text-right rb-md-6"><h4>合同编号：<small>N1500001</small></h4></div>
     </div>
     <div class="row title">
@@ -35,7 +9,7 @@ AppAsset::register($this);
     <div class="row company">
         <div class="text-center"><h3>北京神舟国际旅行社集团有限公司</h3></div>
     </div>
-    <?= PdfHelper::PAGE_BREAK ?>
+    {$PAGE_BREAK}
     <div class="row desctitle">
         <div class="text-center"><h3>使用说明</h3></div>
     </div>
@@ -47,7 +21,7 @@ AppAsset::register($this);
             <li>本合同依照国家旅游局和国家工商行政管理总局示范文本制定。</li>
         </ol>
     </div>
-    <?= PdfHelper::PAGE_BREAK ?>
+    {$PAGE_BREAK}
     <div class="row">
         <div class="text-center"><h2>境内旅游合同</h2></div>
         <div>
@@ -320,7 +294,7 @@ AppAsset::register($this);
         </div>
     </div>
 
-    <?= PdfHelper::PAGE_BREAK ?>
+    {$PAGE_BREAK}
     <!--协议条款-->
     <div class="row">
         <div class="text-center font-heiti"><strong>第七章&emsp;协议条款</strong></div>
@@ -381,7 +355,7 @@ AppAsset::register($this);
                 <li>行程安排之外的购物活动、另行付费旅游项目双方需签订《自愿购物活动补充协议》、《自愿参加另行付费旅游项目补充协议》。</li>
             </ol>
         </div>
-        <?= PdfHelper::PAGE_BREAK ?>
+        {$PAGE_BREAK}
         <div class="">
             <p>第二十六条&emsp;争议的解决方式</p>
             <p>本合同履行过程中发生争议，由双方协商解决，亦可向合同签订地的旅游质监执法机构、消费者协会、有关的调解组织等有关部门或者机构申请调解。协商或者调解不成的，依法向<u>北京市朝阳区人民法院</u>起诉。</p>
@@ -476,7 +450,7 @@ AppAsset::register($this);
                 </div>
             </div>
         </div>
-        <?= PdfHelper::PAGE_BREAK ?>
+        {$PAGE_BREAK}
         <div class="">
             <p class="file">附件1：</p>
             <div class="text-center font-heiti"><h3>旅行旅游报名表</h3></div>
@@ -547,7 +521,7 @@ AppAsset::register($this);
                     </div>
              </div>
         </div>
-        <?= PdfHelper::PAGE_BREAK ?>
+        {$PAGE_BREAK}
         <div class="">
             <p class="file">附件2：</p>
             <div class="text-center font-heiti">
@@ -666,8 +640,3 @@ AppAsset::register($this);
         <p><small>本文件为合同附件，请仔细阅读，谢谢您的合作，在此谨代表神舟国旅祝您身体健康，旅途愉快！</small></p>
     </div>
  </div>
-<?php $this->endBody() ?>
-</body>
-</html>
-<?php $this->endPage() ?>
-
