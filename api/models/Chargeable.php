@@ -34,7 +34,7 @@ class Chargeable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['contr_id'], 'required'],
+            [['charid','contr_id'], 'required'],
             [['contr_id', 'duration', 'agree', 'index'], 'integer'],
             [['time'], 'safe'],
             [['price'], 'number'],
