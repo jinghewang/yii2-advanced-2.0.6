@@ -192,7 +192,12 @@ class ContractVersionController extends Controller
      */
     public function actionTest()
     {
-        return $this->renderPartial('test');
+        $this->layout = 'main_outer.php';
+        return $this->render('test.tpl',[
+            'name'=>'wjh',
+            'age'=>28,
+            'data'=>[13,45]
+        ]);
     }
 
     /**

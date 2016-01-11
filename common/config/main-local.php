@@ -44,6 +44,10 @@ return [
                     'options' => [
                         //'php_handling'=>3,
                     ],
+                    'pluginDirs' => [
+                        '@app/../common/plugins',
+                        '@app/../vendor/smarty/smarty/libs/plugins'
+                    ],
                     //'left_delimiter' => '{{',
                     //'right_delimiter' => '}}',
                 ],

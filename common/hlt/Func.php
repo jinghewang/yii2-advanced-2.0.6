@@ -21,3 +21,4 @@ function var_dump_die ($expression, $expression2 = null) {
     echo '</pre>';
     die;
 }
+
