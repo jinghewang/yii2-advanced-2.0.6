@@ -51,6 +51,7 @@ class HtmlController extends Controller
         $pdf = Yii::$app->pdf;
         $pdf->cssInline .= $css;
         $pdf->content = $htmlContent;
+        //methods
         $pdf->methods['SetHeader'] = '合同编号<span class="color-tno">N1500001</span>';
         $pdf->methods['SetTitle'] = ConfigHelper::getAppConfig('down');
         $pdf->methods['SetAuthor'] = ConfigHelper::getAppConfig('author');
