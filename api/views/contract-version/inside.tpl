@@ -1,10 +1,10 @@
 <div class="container">
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6 rb-md-6"><h4>BTG-2016-2</h4></div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right rb-md-6"><h4>合同编号：<small>N1500001</small></h4></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 rb-md-6"><h4>BTG-{$year}</h4></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 text-right rb-md-6"><h4>合同编号：<small>{$contract.contr_no}</small></h4></div>
     </div>
     <div class="row title">
-        <div class="text-center"><h2>境内旅游合同</h2></div>
+        <div class="text-center"><h2>{$version.title}</h2></div>
     </div>
     <div class="row company">
         <div class="text-center"><h3>北京神舟国际旅行社集团有限公司</h3></div>
