@@ -2,6 +2,16 @@
 
 namespace api\controllers;
 
+use api\models\Contract;
+use api\models\Group;
+use api\models\Organization;
+use api\models\Other;
+use api\models\Traveller;
+use common\helpers\ConfigHelper;
+use common\helpers\DataHelper;
+use common\helpers\PdfHelper;
+use Faker\Provider\zh_TW\DateTime;
+use kartik\mpdf\Pdf;
 use Yii;
 use api\models\ContractVersion;
 use api\models\ContractVersionSearch;
@@ -39,6 +49,169 @@ class ContractVersionController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+
+    /**
+     * Lists all AccessApp models.
+     * @return mixed
+     */
+    public function actionPreview($contr_id='1')
+    {
+        /**
+         * @var Pdf $pdf
+         * @var Contract $ec
+         */
+
+        $this->layout = 'main_outer';
+
+        $ec = Contract::findOne($contr_id);
+        if (empty($ec))
+            throw new Exception('合同不存在');
+
+        //$pdf->output($htmlContent);
+        return $this->render('inside');
+    }
+
+    /**
+     * Lists all AccessApp models.
+     * @return mixed
+     */
+    public function actionPreviewPdf($contr_id='1')
+    {
+        /**
+         * @var Pdf $pdf
+         * @var Contract $ec
+         */
+
+        $ec = Contract::findOne($contr_id);
+        if (empty($ec))
+            throw new Exception('合同不存在');
+
+        //pdf
+        $css = Yii::$app->basePath . "/web/css/ec.css";
+        $css = file_get_contents($css);
+        $htmlContent = $this->renderPartial('inside');//file_get_contents("D:/template/t2.htm");
+        $pdf = Yii::$app->pdf;
+        $pdf->cssInline .= $css;
+        $pdf->content = $htmlContent;
+        $pdf->filename = "电子合同-{$ec->contr_no}.pdf";
+        //methods
+        $pdf->methods['SetHeader'] = "合同编号<span class=\"color-tno\">{$ec->contr_no}</span>";
+        $pdf->methods['SetTitle'] = ConfigHelper::getAppConfig('down');
+        $pdf->methods['SetAuthor'] = ConfigHelper::getAppConfig('author');
+        $pdf->methods['SetCreator'] = ConfigHelper::getAppConfig('creator');
+        $pdf->methods['SetSubject'] = ConfigHelper::getAppConfig('subject');
+
+        //$pdf->output($htmlContent);
+        return $pdf->render();
+    }
+
+
+    /**
+     * Lists all AccessApp models.
+     * @return mixed
+     */
+    public function actionPreviewTpl($contr_id='1')
+    {
+        /**
+         * @var Pdf $pdf
+         * @var Contract $ec
+         * @var Group $group
+         * @var Organization $provider
+         * @var Traveller $assigned
+         * @var Other $other
+         */
+
+        $this->layout = 'main_outer.php';
+
+        $ec = Contract::findOne($contr_id);
+        if (empty($ec))
+            throw new Exception('合同不存在');
+
+        $version = ContractVersion::findOne($ec->vercode);
+        if (empty($version))
+            throw new Exception('合同版本不存在');
+
+        $travellers = Traveller::find()->andWhere('contr_id=:contr_id', [':contr_id' => $ec->contr_id])->all();
+        $provider = Organization::findOne(1);
+        $assigned = Traveller::find()->andWhere('contr_id=:contr_id and is_leader=:is_leader', [':contr_id' => $ec->contr_id, ':is_leader' => '1'])->one();;
+        $group = Group::find()->andWhere('contr_id=:contr_id', [':contr_id' => $ec->contr_id])->one();
+
+        $other = Other::findOne($contr_id);
+        $pay = json_decode($other->pay,true);
+        $insurance = json_decode($other->insurance,true);
+        $groupcorp = json_decode($other->groupcorp,true);
+        $otherGroup = json_decode($other->group,true);
+        $effect = json_decode($other->effect,true);
+
+        $data = [
+            'contract' => $ec,//合同
+            'version' => $version,//合同版本
+            'provider' => $provider,//旅行社
+            'group' => $group,//团信息
+            'assigned' => $assigned,//签字代表
+            'travellers' => $travellers,//人员名单
+            'other'=>$other,
+            'pay' => $pay,
+            'insurance' => $insurance,
+            'groupcorp' => $groupcorp,
+            'otherGroup' => $otherGroup,
+            'effect' => $effect,
+            //----------------------------------
+            'app' => ConfigHelper::getParamsConfigArray('app'),//app 信息
+            'company' => ConfigHelper::getParamsConfigArray('company'),//公司信息
+            'year' => date('Y'),//年份
+            'PAGE_BREAK' => PdfHelper::PAGE_BREAK,//分页符
+        ];
+
+        //pdf
+        $css = Yii::$app->basePath . "/web/css/ec.css";
+        $css = file_get_contents($css);
+        $htmlContent = $this->renderPartial('inside.tpl',$data);//file_get_contents("D:/template/t2.htm");
+        $pdf = Yii::$app->pdf;
+        $pdf->cssInline .= $css;
+        $pdf->content = $htmlContent;
+        $pdf->filename = "电子合同-{$ec->contr_no}.pdf";
+        //methods
+        $pdf->methods['SetHeader'] = "合同编号<span class=\"color-tno\">{$ec->contr_no}</span>";
+        $pdf->methods['SetTitle'] = ConfigHelper::getAppConfig('down');
+        $pdf->methods['SetAuthor'] = ConfigHelper::getAppConfig('author');
+        $pdf->methods['SetCreator'] = ConfigHelper::getAppConfig('creator');
+        $pdf->methods['SetSubject'] = ConfigHelper::getAppConfig('subject');
+
+        //$pdf->output($htmlContent);
+        return $pdf->render();
+        //return $this->render('inside.tpl',$data);
+    }
+
+
+    /**
+     * Lists all AccessApp models.
+     * @return mixed
+     */
+    public function actionTest()
+    {
+        return $this->renderPartial('test');
+    }
+
+    /**
+     * Lists all AccessApp models.
+     * @return mixed
+     */
+    public function actionTestPdf()
+    {
+        /**
+         * @var Pdf $pdf
+         */
+        $css = Yii::$app->basePath . "/web/css/ec.css";
+        $css = file_get_contents($css);
+        $htmlContent = $this->renderPartial('test');//file_get_contents("D:/template/t2.htm");
+        $pdf = Yii::$app->pdf;
+        $pdf->content = $htmlContent;
+        $pdf->cssInline .= $css;
+
+        return $pdf->render();
     }
 
     /**

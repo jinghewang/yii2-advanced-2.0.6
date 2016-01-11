@@ -7,7 +7,7 @@
         <div class="text-center"><h2>{$version.title}</h2></div>
     </div>
     <div class="row company">
-        <div class="text-center"><h3>北京神舟国际旅行社集团有限公司</h3></div>
+        <div class="text-center"><h3>{$provider.name}</h3></div>
     </div>
     {$PAGE_BREAK}
     <div class="row desctitle">
@@ -23,16 +23,16 @@
     </div>
     {$PAGE_BREAK}
     <div class="row">
-        <div class="text-center"><h2>境内旅游合同</h2></div>
+        <div class="text-center"><h2>{$version.title}</h2></div>
         <div>
             <p>
-                旅游者：<u>吕逵</u>等<u>3</u>人（名单可附页，需旅行社和旅游者代表签字盖章确认）；
+                旅游者：<u>{$assigned.name}</u>等<u>{count($travellers)}</u>人（名单可附页，需旅行社和旅游者代表签字盖章确认）；
             </p>
             <p>
-                旅行社：<u>北京神舟国际旅行社集团有限公司</u>
+                旅行社：<u>{$provider.name}</u>
             </p>
             <p>
-                旅行社业务经营许可证编号：<u>L-BJ-CJ00080</u>
+                旅行社业务经营许可证编号：<u>{$provider.license}</u>
             </p>
         </div>
     </div>
@@ -300,17 +300,17 @@
         <div class="text-center font-heiti"><strong>第七章&emsp;协议条款</strong></div>
         <div>
             <p>第二十条&emsp;线路行程时间</p>
-            <p>线路名称及编号：<u>&emsp;&emsp;&emsp;&emsp;</u></p>
-            <p>出发时间：<u>&emsp;&emsp;&emsp;&emsp;</u>年<u>&emsp;&emsp;</u>月<u>&emsp;&emsp;</u>日，</p>
-            <p>结束时间：<u>&emsp;&emsp;&emsp;&emsp;</u>年<u>&emsp;&emsp;</u>月<u>&emsp;&emsp;</u>日；</p>
-            <p>共<u>&emsp;&emsp;&emsp;</u>天，饭店住宿<u>&emsp;&emsp;&emsp;</u>夜。</p>
+            <p>线路名称及编号：<u>&emsp;{$group.linename}&emsp;</u></p>
+            <p>出发时间：<u>&emsp;{$group.bgndate|date_format:"%Y"}&emsp;</u>年<u>&emsp;{$group.bgndate|date_format:"%m"}&emsp;</u>月<u>&emsp;{$group.bgndate|date_format:"%e"}&emsp;</u>日，</p>
+            <p>结束时间：<u>&emsp;{$group.enddate|date_format:"%Y"}&emsp;</u>年<u>&emsp;{$group.enddate|date_format:"%m"}&emsp;</u>月<u>&emsp;{$group.enddate|date_format:"%e"}&emsp;</u>日；</p>
+            <p>共<u>&emsp;{$group.days}&emsp;</u>天，饭店住宿<u>&emsp;{$group.nights}&emsp;</u>夜。</p>
         </div>
         <div>
             <p>第二十一条&emsp;旅游费用及支付（以人民币为计算单位）</p>
-            <p>成人<u>&emsp;&emsp;</u>人、成人<u>&emsp;&emsp;</u>元/人、儿童（不满12岁）<u>&emsp;&emsp;</u>人、儿童<u>&emsp;&emsp;</u>元/人；</p>
-            <p>旅游费用合计 ：<u>&emsp;&emsp;&emsp;</u>元。</p>
-            <p>旅游费用支付方式 ：<u>&emsp;&emsp;&emsp;</u></p>
-            <p>旅游费用支付时间 ：<u>&emsp;&emsp;&emsp;</u></p>
+            <p>成人<u>&emsp;{$pay.numAdult}&emsp;</u>人、成人<u>&emsp;{$pay.payEachAdult}&emsp;</u>元/人、儿童（不满12岁）<u>&emsp;{$pay.numChild}&emsp;</u>人、儿童<u>&emsp;{$pay.payEachChild}&emsp;</u>元/人；</p>
+            <p>旅游费用合计 ：<u>&emsp;{$pay.payTravel}&emsp;</u>元。</p>
+            <p>旅游费用支付方式 ：<u>&emsp;{$pay.payType}&emsp;</u></p>
+            <p>旅游费用支付时间 ：<u>&emsp;{$pay.payDeadline}&emsp;</u></p>
         </div>
         <div>
             <p>第二十二条&emsp;人身意外伤害保险</p>
@@ -318,31 +318,31 @@
                 <li>旅行社提示旅游者购买人身意外伤害保险；</li>
                 <li>旅游者可以做以下选择：</li>
                 <ol class="list-unstyled">
-                    <li>□委托旅行社购买 （旅行社不具有保险兼业代理资格的，不得勾选此项）：</li>
-                    <li>保险产品名称<u>&emsp;</u>投保的相关信息以实际保单为准）；</li>
-                    <li>□自行购买；</li>
-                    <li>□放弃购买。</li>
+                    <li>{if $insurance.purchases eq '1'}<img style="margin-bottom: -2px;" src="/images/sprite1.png">{else}<img style="margin-bottom: -2px;" src="/images/sprite2.png">{/if}委托旅行社购买 （旅行社不具有保险兼业代理资格的，不得勾选此项）：</li>
+                    <li>保险产品名称<u>&emsp;{$insurance.insurance}&emsp;</u>投保的相关信息以实际保单为准）；</li>
+                    <li>{if $insurance.purchases eq '2'}<img style="margin-bottom: -2px;" src="/images/sprite1.png">{else}<img style="margin-bottom: -2px;" src="/images/sprite2.png">{/if}自行购买；</li>
+                    <li>{if $insurance.purchases eq '3'}<img style="margin-bottom: -2px;" src="/images/sprite1.png">{else}<img style="margin-bottom: -2px;" src="/images/sprite2.png">{/if}放弃购买。</li>
                 </ol>
             </ol>
         </div>
         <div class="">
             <p>第二十三条&emsp;成团人数与不成团的约定</p>
             <ol class="list-unstyled">
-                <li>成团的最低人数：<u>&emsp;</u>人。</li>
+                <li>成团的最低人数：<u>&emsp;{$group.personLimit}&emsp;</u>人。</li>
                 <li>如不能成团，旅游者是否同意按下列方式解决：</li>
                 <ol>
-                    <li><u>&emsp;&emsp;</u>（同意或者不同意，打勾无效）旅行社委托<u>&emsp;</u>旅行社履行合同；</li>
-                    <li><u>&emsp;&emsp;</u>（同意或者不同意，打勾无效）延期出团；</li>
-                    <li><u>&emsp;&emsp;</u>（同意或者不同意，打勾无效）改签其他线路出团；</li>
-                    <li><u>&emsp;&emsp;</u>同意或者不同意，打勾无效）解除合同。</li>
+                    <li><u>&emsp;{if $otherGroup.transAgree eq '1'}同意{else}不同意{/if}&emsp;</u>（同意或者不同意，打勾无效）旅行社委托<u>&emsp;{$otherGroup.transAgency}</u>旅行社履行合同；</li>
+                    <li><u>&emsp;{if $otherGroup.delayAgree eq '1'}同意{else}不同意{/if}&emsp;</u>（同意或者不同意，打勾无效）延期出团；</li>
+                    <li><u>&emsp;{if $otherGroup.changeLineAgree eq '1'}同意{else}不同意{/if}&emsp;</u>（同意或者不同意，打勾无效）改签其他线路出团；</li>
+                    <li><u>&emsp;{if $otherGroup.terminateAgree eq '1'}同意{else}不同意{/if}&emsp;</u>同意或者不同意，打勾无效）解除合同。</li>
                 </ol>
             </ol>
         </div>
         <div>
             <p>第二十四条&emsp;拼团约定</p>
             <ol class="list-unstyled">
-                <li>旅游者<u>&emsp;&emsp;</u>（同意或者不同意，打勾无效）采用拼团方式出团。</li>
-                <li>委托/接待社名称：<u>&emsp;&emsp;</u></li>
+                <li>旅游者<u>&emsp;{if $otherGroup.mergeAgree eq '1'}同意{else}不同意{/if}&emsp;</u>（同意或者不同意，打勾无效）采用拼团方式出团。</li>
+                <li>委托/接待社名称：<u>&emsp;{$otherGroup.mergeAgency}&emsp;</u></li>
             </ol>
         </div>
         <div>
@@ -364,12 +364,12 @@
             <p>第二十七条&emsp;其他约定事项</p>
             <p>未尽事宜，经旅游者和旅行社双方协商一致，可以列入补充条款。（如合同空间不够，可以另附纸张，由双方签字或者盖章确认。）</p>
             <ol>
-                <li>关于安全保障卡：您已领取<u>&emsp;</u>人安全保障卡，请确保每人准确填写、随身携带；</li>
-                <li>关于代理签合同：本人承诺全权代表<u>&emsp;</u>等<u>&emsp;</u>人签订本合同，履行相应义务，承担相应责任；</li>
+                <li>关于安全保障卡：您已领取<u>&emsp;{$travellers|count}</u>人安全保障卡，请确保每人准确填写、随身携带；</li>
+                <li>关于代理签合同：本人承诺全权代表<u>&emsp;{$assigned.name}</u>等<u>&emsp;{$travellers|count}</u>人签订本合同，履行相应义务，承担相应责任；</li>
                 <li>关于预定预付费用：<u>&emsp;</u> </li>
                 <li>关于酒店、机票的特别约定：<u style="color: #ff0000">因机票为团队机票，酒店需提前预定，双方一经确认，机票、酒店费用将实际发生。如因甲方退团或变更，所产生的机票、酒店费用，由甲方承担。</u></li>
                 <li>关于出团通知：发放时间及方式：<u>&emsp;</u>  </li>
-                <li>其它特别约定：<u>&emsp;</u></li>
+                <li>其它特别约定：<u>{$other.other}&emsp;</u></li>
             </ol>
         </div>
         <div>
@@ -377,71 +377,71 @@
             <p>本合同一式贰份，双方各持壹份，具有同等法律效力，自双方当事人签字或者盖章之日起生效。</p>
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    旅游者（或代表）签字（盖章）：
+                    旅游者（或代表）签字（盖章）：{$assigned.name}
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    旅行社盖章：
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    证件号码：
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    签约代表签字（盖章）：
+                    旅行社盖章：{$groupcorp.corp}
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    住&emsp;&emsp;址：
+                    证件号码：{$assigned.idcode}
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    营业地址：
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    联系电话：
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    联系电话：
+                    签约代表签字（盖章）：{$groupcorp.sign}
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    传&emsp;&emsp;真：
+                    住&emsp;&emsp;址：{$assigned.addr}
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    传&emsp;&emsp;真：
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    邮&emsp;&emsp;编：
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    邮&emsp;&emsp;编：
+                    营业地址：{$groupcorp.addr}
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    电子信箱：
+                    联系电话：{$assigned.mobile}
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    电子信箱：
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    签约日期：　　       　年     　月　     日
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    签约日期：　　       　年     　月　     日
+                    联系电话：{$groupcorp.tel}
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
-                    签约地点：
+                    传&emsp;&emsp;真：{$assigned.extra.fax}
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
+                    传&emsp;&emsp;真：{$groupcorp.fax}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
+                    邮&emsp;&emsp;编：{$assigned.extra.zip}
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
+                    邮&emsp;&emsp;编：{$groupcorp.zip}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
+                    电子信箱：{$assigned.extra.mail}
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
+                    电子信箱：{$groupcorp.mail}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
+                    签约日期：{$contract.signTimeF}
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
+                    签约日期：{$contract.signTimeF}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col rb-md-6">
+                    签约地点：{$effect.addr}
                 </div>
             </div>
             <div class="row">
@@ -454,7 +454,7 @@
         <div class="">
             <p class="file">附件1：</p>
             <div class="text-center font-heiti"><h3>旅行旅游报名表</h3></div>
-            <p>旅游线路及编号　　　　                            　  　 出团时间　　　　　　</p>
+            <p>旅游线路及编号：<u>&emsp;{$group.linename}({$group.teamcode})&emsp;</u>　　　出团时间:<u>&emsp;{$group.bgndate}&emsp;</p>
             <div class="table-responsive">
                 <table class="table table-bordered rb-table-bordered">
                     <tr>
@@ -469,21 +469,19 @@
                         <td class="text-center rb-th">身体状况</td>
                     </tr>
                     <tbody>
-                    <?php
-                        for($i=1;$i<=8;$i++){
-                    ?>
+                    {foreach from=$travellers key=num item="member"}
                         <tr>
-                            <td class="text-center rb-td"><?=$i?></td>
-                            <td class="text-center rb-td">&nbsp;</td>
-                            <td class="text-center rb-td">&nbsp;</td>
-                            <td class="text-center rb-td">&nbsp;</td>
-                            <td class="text-center rb-td">&nbsp;</td>
-                            <td class="text-center rb-td">&nbsp;</td>
-                            <td class="text-center rb-td">&nbsp;</td>
-                            <td class="text-center rb-td">&nbsp;</td>
-                            <td class="text-center rb-td">&nbsp;</td>
+                            <td class="text-center rb-td">{$num+1}</td>
+                            <td class="text-center rb-td">{$member.sex}&nbsp;</td>
+                            <td class="text-center rb-td">{$member.birthday}&nbsp;</td>
+                            <td class="text-center rb-td">{$member.nation}&nbsp;</td>
+                            <td class="text-center rb-td">{$member.idcode}&nbsp;</td>
+                            <td class="text-center rb-td">{$member.idcode}&nbsp;</td>
+                            <td class="text-center rb-td">{$member.idcode}&nbsp;</td>
+                            <td class="text-center rb-td">{$member.idcode}&nbsp;</td>
+                            <td class="text-center rb-td">{$member.idcode}&nbsp;</td>
                         </tr>
-                    <?php } ?>
+                    {/foreach}
                     <tr>
                         <td style="vertical-align: middle; " class="text-center">备<br>&emsp;<br>&emsp;<br>&emsp;<br>注</td>
                         <td colspan="8" height="300">

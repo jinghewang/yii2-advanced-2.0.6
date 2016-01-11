@@ -34,6 +34,17 @@ class Traveller extends \yii\db\ActiveRecord
     const LEADER_YES='1';
     const LEADER_NO='0';
 
+
+    /**
+     * @return array|mixed
+     */
+    public function getExtra()
+    {
+        if (!empty($this->extra_data))
+            return json_decode($this->extra_data,true);
+        return [];
+    }
+
     /**
      * @inheritdoc
      */

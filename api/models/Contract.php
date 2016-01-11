@@ -2,6 +2,7 @@
 
 namespace api\models;
 
+use common\helpers\DataHelper;
 use common\models\User;
 use Yii;
 
@@ -19,6 +20,7 @@ use Yii;
  * @property integer $is_submit
  * @property string $sub_time
  * @property string $sign_time
+ * @property string $sign_time_f
  * @property string $price
  * @property integer $num
  * @property string $transactor
@@ -83,6 +85,18 @@ class Contract extends \yii\db\ActiveRecord
      */
     const CONTRACT_AUDITSTATUS_YES='1';
     const CONTRACT_AUDITSTATUS_NO='0';
+
+
+    /**
+     * @return mixed
+     */
+    public function getSignTimeF()
+    {
+        if (empty($this->sign_time))
+            return '';
+
+        return DataHelper::getSignTime($this->sign_time);
+    }
 
     /**
      * @inheritdoc

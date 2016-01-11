@@ -14,10 +14,10 @@ use Yii;
 class BaseConfigHelper
 {
     /**
-     * »ñÈ¡hlt ÅäÖÃĞÅÏ¢
+     * è·å–hlt é…ç½®ä¿¡æ¯
      * @author wjh
      * @version 2015-4-6
-     * @return string ÓÃ»§¶ÔÏóUser
+     * @return string ç”¨æˆ·å¯¹è±¡User
      */
     public static function getParamsConfig($param, $key, $defaultvalue = null)
     {
@@ -28,6 +28,20 @@ class BaseConfigHelper
                 return Yii::$app->params[$param][$key];
             }
         }
+        return $defaultvalue;
+    }
+
+    /**
+     * è·å–hlt é…ç½®ä¿¡æ¯
+     * @author wjh
+     * @version 2015-4-6
+     * @return string ç”¨æˆ·å¯¹è±¡User
+     */
+    public static function getParamsConfigArray($param,$defaultvalue=null)
+    {
+        if (isset(Yii::$app->params[$param]))
+            return Yii::$app->params[$param];
+
         return $defaultvalue;
     }
 }

@@ -13,11 +13,11 @@
  * @param null $expression2
  */
 function var_dump_die ($expression, $expression2 = null) {
-    //echo '<pre>';
+    echo '<pre>';
     if (empty($expression2))
         var_dump($expression);
     else
         var_dump($expression,$expression2);
-    //echo '</pre>';
+    echo '</pre>';
     die;
 }

@@ -9,7 +9,7 @@ return [
         ),
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
+            'dsn' => 'mysql:host=192.168.1.106;dbname=yii2advanced',
             'username' => 'root',
             'password' => '123456',
             'charset' => 'utf8',
@@ -39,7 +39,13 @@ return [
             'renderers' => [
                 'tpl' => [
                     'class' => 'yii\smarty\ViewRenderer',
-                    //'cachePath' => '@runtime/Smarty/cache',
+                    'cachePath' => '@runtime/Smarty/cache',
+                    'compilePath' => '@runtime/Smarty/compile',
+                    'options' => [
+                        //'php_handling'=>3,
+                    ],
+                    //'left_delimiter' => '{{',
+                    //'right_delimiter' => '}}',
                 ],
                 'twig' => [
                     'class' => 'yii\twig\ViewRenderer',

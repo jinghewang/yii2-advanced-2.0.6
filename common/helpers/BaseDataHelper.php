@@ -289,6 +289,14 @@ abstract class BaseDataHelper {
 	}
 
 	/*
+	 * 获取当前时间
+	 */
+	public static function getSignTime($date,$format = 'Y年m月d日') {
+		date_default_timezone_set('PRC');
+		return date($format,strtotime($date));
+	}
+
+	/*
  * 获取当前时间
  */
 	public static function getCurrentDate($format = 'Y-m-d') {
@@ -1678,7 +1686,7 @@ abstract class BaseDataHelper {
      * @param null $return
      */
     public static function print_r($expression,$expression2=null,$expression3=null,$expression4=null,$expression5=null,$expression6=null,$expression7=null, $return = null){
-        BDataHelper::addPreStart();
+        DataHelper::addPreStart();
         print_r($expression, $return);
 		if (!empty($expression2))
 			print_r($expression2);
@@ -1692,7 +1700,7 @@ abstract class BaseDataHelper {
 			print_r($expression6);
 		if (!empty($expression7))
 			print_r($expression7);
-		BDataHelper::addPreEdn();
+		DataHelper::addPreEdn();
     }
 
 
