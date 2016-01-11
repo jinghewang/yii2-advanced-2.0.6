@@ -72,6 +72,41 @@ class HtmlController extends Controller
         return $pdf->render();
     }
 
+
+    /**
+     * Lists all AccessApp models.
+     * @return mixed
+     */
+    public function actionIndexTpl($contr_id='1')
+    {
+        /**
+         * @var Pdf $pdf
+         * @var Contract $ec
+         */
+
+        $ec = Contract::findOne($contr_id);
+        if (empty($ec))
+            throw new Exception('合同不存在');
+
+        //pdf
+        $css = Yii::$app->basePath . "/web/css/ec.css";
+        $css = file_get_contents($css);
+        $htmlContent = $this->renderPartial('inside.tpl');//file_get_contents("D:/template/t2.htm");
+        $pdf = Yii::$app->pdf;
+        $pdf->cssInline .= $css;
+        $pdf->content = $htmlContent;
+        $pdf->filename = "电子合同-{$ec->contr_no}.pdf";
+        //methods
+        $pdf->methods['SetHeader'] = "合同编号<span class=\"color-tno\">{$ec->contr_no}</span>";
+        $pdf->methods['SetTitle'] = ConfigHelper::getAppConfig('down');
+        $pdf->methods['SetAuthor'] = ConfigHelper::getAppConfig('author');
+        $pdf->methods['SetCreator'] = ConfigHelper::getAppConfig('creator');
+        $pdf->methods['SetSubject'] = ConfigHelper::getAppConfig('subject');
+
+        //$pdf->output($htmlContent);
+        return $pdf->render();
+    }
+
     /**
      * Lists all AccessApp models.
      * @return mixed
