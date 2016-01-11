@@ -15,6 +15,7 @@ use Yii;
  * @property integer $rgt
  * @property integer $level
  * @property string $enname
+* @property string $license
  * @property string $vercode
  * @property string $seal
  * @property string $logo
@@ -45,7 +46,7 @@ class Organization extends \yii\db\ActiveRecord
             [['createtime'], 'safe'],
             [['extra_data'], 'string'],
             [['orgid', 'parentid', 'vercode', 'seal', 'logo', 'teltext', 'createuserid'], 'string', 'max' => 40],
-            [['name', 'enname'], 'string', 'max' => 100]
+            [['name', 'enname', 'license'], 'string', 'max' => 100]
         ];
     }
 
@@ -62,6 +63,7 @@ class Organization extends \yii\db\ActiveRecord
             'rgt' => '右值',
             'level' => '级别',
             'enname' => '英文名称',
+            'license' => '经营许可证',
             'vercode' => '合同版本',
             'seal' => '签章图片',
             'logo' => 'logo',
