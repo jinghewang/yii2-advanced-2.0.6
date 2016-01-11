@@ -2,6 +2,8 @@
 
 namespace api\controllers;
 
+use common\helpers\ConfigHelper;
+use mPDF;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -38,7 +40,7 @@ class HtmlController extends Controller
      * Lists all AccessApp models.
      * @return mixed
      */
-    public function actionIndexPdf($down=false)
+    public function actionIndexPdf()
     {
         /**
          * @var Pdf $pdf
@@ -47,18 +49,19 @@ class HtmlController extends Controller
         $css = file_get_contents($css);
         $htmlContent = $this->renderPartial('inside');//file_get_contents("D:/template/t2.htm");
         $pdf = Yii::$app->pdf;
-        $pdf->content = $htmlContent;
-        $pdf->methods['SetHeader'] = '合同编号T<span class="color-tno">00001</span>';
         $pdf->cssInline .= $css;
+        $pdf->content = $htmlContent;
+        $pdf->methods['SetHeader'] = '合同编号<span class="color-tno">N1500001</span>';
+        $pdf->methods['SetTitle'] = ConfigHelper::getAppConfig('down');
+        $pdf->methods['SetAuthor'] = ConfigHelper::getAppConfig('author');
+        $pdf->methods['SetCreator'] = ConfigHelper::getAppConfig('creator');
+        $pdf->methods['SetSubject'] = ConfigHelper::getAppConfig('subject');
 
-        if (!$down)
-            return $pdf->render();
-        else{
-            //$pdf->output($htmlContent, '123.pdf');
-            //die;
-        }
 
-        //<pagebreak></pagebreak>
+        Yii::$app->response->downloadHeaders = '123.pdf';
+
+        //$pdf->output($htmlContent);
+        return $pdf->render();
     }
 
     /**
