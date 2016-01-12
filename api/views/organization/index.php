@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel api\models\OrganizationSearch */
@@ -19,14 +20,20 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('新增组织', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php \yii\widgets\Pjax::begin(); ?>
+    <?php Pjax::begin(['id'=>'org-data']); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'id'=>'org-data',
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
             'enname',
+            [
+                'label'=>'seal',
+                'attribute' => 'seal',
+                'value' => 'seal.filename',
+            ],
             [
                 'label'=>'创建人',
                 'attribute' => 'username',
@@ -46,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-    <?php \yii\widgets\Pjax::end(); ?>
+    <?php Pjax::end(); ?>
 
 </div>
 

@@ -9,7 +9,6 @@ require(__DIR__ . '/../config/bootstrap.php');
 
 //set func
 require(__DIR__ . '/../../common/hlt/Func.php');
-
 $config = yii\helpers\ArrayHelper::merge(
     require(__DIR__ . '/../../common/config/main.php'),
     require(__DIR__ . '/../../common/config/main-local.php'),
