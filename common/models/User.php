@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use api\models\Organization;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -184,5 +185,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function getOrg(){
+        return $this->hasOne(Organization::className(),['orgid'=>'orgid']);
     }
 }
