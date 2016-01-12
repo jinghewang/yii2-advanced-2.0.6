@@ -16,10 +16,10 @@
  * @link   http://www.smarty.net/manual/en/language.function.counter.php {counter}
  *         (Smarty online manual)
  *
- * @param array                    $params   parameters
+ * @param array $params parameters
  * @param Smarty_Internal_Template $template template object
- *
- * @return string|null
+ * @return null|string
+ * @throws \yii\base\Exception
  */
 function smarty_function_date_format($params, $template)
 {
