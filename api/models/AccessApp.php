@@ -2,6 +2,7 @@
 
 namespace api\models;
 
+use common\models\User;
 use Yii;
 
 /**
@@ -50,5 +51,12 @@ class AccessApp extends \yii\db\ActiveRecord
             'created' => '创建时间',
             'modified' => '修改时间',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser(){
+        return $this->hasOne(User::className(),['id'=>'uid']);
     }
 }

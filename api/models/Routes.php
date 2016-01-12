@@ -30,6 +30,9 @@ class Routes extends \yii\db\ActiveRecord
         return 'routes';
     }
 
+    const ROUTE_TYPE_JOURNEY='journey';
+    const ROUTE_TYPE_CITY='city';
+
     /**
      * @inheritdoc
      */

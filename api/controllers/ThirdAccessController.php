@@ -1,6 +1,7 @@
 <?php
 namespace api\controllers;
 
+use api\services;
 /**
  * Created by PhpStorm.
  * User: lenovo
