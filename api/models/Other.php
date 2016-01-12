@@ -32,7 +32,6 @@ class Other extends \yii\db\ActiveRecord
     public static  $ArrayGroup_Fail=array('0'=>'委托出团','1'=>'延期出团','2'=>'改签线路','3'=>'解除合同');
     public static  $ArrayConciliation=array('1'=>'仲裁委员会','2'=>'人民法院');
     public static  $ArrayIs_Fight=array('1'=>'同意','0'=>'不同意');
-
     /**
      * @inheritdoc
      */

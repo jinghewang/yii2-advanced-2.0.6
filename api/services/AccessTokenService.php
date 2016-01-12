@@ -4,10 +4,12 @@ namespace api\services;
 use api\models\AccessApp;
 use api\models\AccessToken;
 use api\services\ThirdAccessService;
+use common\helpers\BaseDataHelper;
 use common\helpers\DataHelper;
 use Faker\Provider\cs_CZ\DateTime;
 use yii\base\Exception;
 use yii\web\Request;
+use Yii;
 
 /**
  * Created by PhpStorm.
@@ -116,6 +118,14 @@ class AccessTokenService
         return $token;
     }
 
+    public static function getCurrentUser(){
+        $user=Yii::$app->session->get('user');
+        if(empty($user)){
+            throw new Exception('Not logged in');
+        }
+        return $user;
+    }
+
 
     public static function validateAPIAuth($appkey, $clientid, $clientsecurity)
     {
@@ -135,16 +145,37 @@ class AccessTokenService
         if ($accessApp->client_secret != $clientsecurity)
             throw new Exception('client_secret 错误');
 
+        $accessToken=AccessToken::findOne(array('clientid'=>$clientid,'appkey'=>$appkey));
+        $usable=true;
+        if(!empty($accessToken)){
+            $date1=date_create(BaseDataHelper::getCurrentTime());
+            $date2=date_create($accessToken->createtime);
+            $diff= date_diff($date1,$date2);
+            if(($diff->format('%y')>0)||($diff->format('%m')>0)||($diff->format('%d')>0)||($diff->format('%h')>0)||($diff->format('%i')>($accessToken->validity/60))){
+                $accessToken->delete();
+                $usable=false;
+            }
+        }else{
+            $usable=false;
+        }
+
         //token
-        $accessToken = new AccessToken();
-        $accessToken->tokenid = DataHelper::random(10);
-        $accessToken->appkey = $appkey;
-        $accessToken->clientid = $clientid;
-        $accessToken->validity = 60;//60秒
-        //date_diff(new DateTime(),)
-        //todo:需要添加过期判断
-        if (!$accessToken->save()){
-            var_dump($accessToken->errors);die;
+        if(!$usable){
+            $accessToken = new AccessToken();
+            $accessToken->tokenid = DataHelper::random(10);
+            $accessToken->appkey = $appkey;
+            $accessToken->clientid = $clientid;
+            $accessToken->validity = 600;//60秒
+            $accessToken->uid=$accessApp->uid;
+            $accessToken->orgid=$accessApp->user->orgid;
+            if (!$accessToken->save()){
+                var_dump($accessToken->errors);die;
+            }
+
+            //当前登录人信息
+            $session = Yii::$app->session;
+            $model=AccessToken::findOne(array('tokenid'=>$accessToken->tokenid));
+            $session->set('user',$model->user);
         }
         return $accessToken;
     }

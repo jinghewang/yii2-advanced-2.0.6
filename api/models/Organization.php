@@ -15,10 +15,10 @@ use Yii;
  * @property integer $rgt
  * @property integer $level
  * @property string $enname
-* @property string $license
  * @property string $vercode
  * @property string $seal
  * @property string $logo
+ * @property string $license
  * @property string $teltext
  * @property string $createuserid
  * @property string $createtime
@@ -42,11 +42,11 @@ class Organization extends \yii\db\ActiveRecord
     {
         return [
             [['orgid'], 'required'],
-            [['lft', 'rgt', 'level', 'isdelete'], 'integer'],
+            [['lft', 'rgt', 'level', 'isdelete','isaudit'], 'integer'],
             [['createtime'], 'safe'],
             [['extra_data'], 'string'],
             [['orgid', 'parentid', 'vercode', 'seal', 'logo', 'teltext', 'createuserid'], 'string', 'max' => 40],
-            [['name', 'enname', 'license'], 'string', 'max' => 100]
+            [['name', 'enname','license'], 'string', 'max' => 100]
         ];
     }
 
@@ -71,6 +71,7 @@ class Organization extends \yii\db\ActiveRecord
             'createuserid' => '创建人',
             'createtime' => '创建时间',
             'extra_data' => '暂定信息 营业地址 addr联系电话 tel传真 fax邮编 zip邮箱 mail',
+            'isaudit'=>'是否需要审核',
             'isdelete' => '状态',
         ];
     }

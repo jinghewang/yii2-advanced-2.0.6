@@ -4,6 +4,7 @@ namespace api\models;
 
 //use Faker\Provider\DateTime;
 use common\helpers\DataHelper;
+use common\models\User;
 use Yii;
 
 /**
@@ -34,10 +35,10 @@ class AccessToken extends \yii\db\ActiveRecord
     {
         return [
             [['tokenid'], 'required'],
-            [['validity'], 'integer'],
+            [['validity','uid'], 'integer'],
             [['createtime'], 'safe'],
             [['tokenid', 'clientid', 'appkey'], 'string', 'max' => 32],
-            [['orgid', 'uid'], 'string', 'max' => 40]
+            [['orgid'], 'string', 'max' => 40]
         ];
     }
 
@@ -63,6 +64,21 @@ class AccessToken extends \yii\db\ActiveRecord
     public function getAppkey()
     {
         return $this->hasOne(AccessApp::className(), ['appkey' => 'appkey']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser(){
+        return $this->hasOne(User::className(), ['id' => 'uid']);
+    }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrg(){
+        return $this->hasOne(Organization::className(), ['orgid' => 'orgid']);
     }
 
     /**

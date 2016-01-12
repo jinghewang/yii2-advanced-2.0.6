@@ -34,7 +34,30 @@ class Traveller extends \yii\db\ActiveRecord
     const LEADER_YES='1';
     const LEADER_NO='0';
 
+    //证件类型
+    const CERT_TYPE_IDCARD = 1;
+    const CERT_TYPE_ARMY = 2;
+    const CERT_TYPE_STD = 3;
+    const CERT_TYPE_PASSPORT = 4;
+    const CERT_TYPE_HKPASS =5;
+    const CERT_TYPE_TWPASS=6;
+    const CERT_TYPE_MTPTWPASS=7;
+    const CERT_TYPE_MTPHKPASS=8;
+    const CERT_TYPE_OTHERPASS=9;
 
+
+    public static $CERT_TYPE = array(
+        self::CERT_TYPE_IDCARD => '身份证',
+        self::CERT_TYPE_ARMY => '军官证',
+        //self::CERT_TYPE_STD => '学生证',
+        self::CERT_TYPE_PASSPORT => '护照',
+        self::CERT_TYPE_HKPASS=>'港澳通行证',
+        self::CERT_TYPE_TWPASS=>'赴台证',
+        self::CERT_TYPE_MTPTWPASS=>'台胞证',
+        self::CERT_TYPE_MTPHKPASS=>'回乡证',
+        self::CERT_TYPE_OTHERPASS=>'其他',
+    );
+    
     /**
      * @return array|mixed
      */
@@ -51,7 +74,7 @@ class Traveller extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['contr_id'], 'required'],
+            [['traveid','contr_id'], 'required'],
             [['contr_id', 'sex', 'idtype', 'no', 'is_leader'], 'integer'],
             [['birthday'], 'safe'],
             [['extra_data'], 'string'],

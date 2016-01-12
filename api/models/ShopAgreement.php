@@ -34,7 +34,7 @@ class ShopAgreement extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['contr_id'], 'required'],
+            [['shopid','contr_id'], 'required'],
             [['contr_id', 'duration', 'agree', 'index'], 'integer'],
             [['time'], 'safe'],
             [['extra_data'], 'string'],
