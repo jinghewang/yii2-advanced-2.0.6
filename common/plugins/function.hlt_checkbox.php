@@ -9,9 +9,9 @@ use \yii\base\Exception;
  */
 
 /**
- * Smarty {date_format} function plugin
+ * Smarty {hlt_checkbox} function plugin
  * Type:     function<br>
- * Name:     date_format<br>
+ * Name:     hlt_checkbox<br>
  * Purpose:  print out a string value
  *
  * @author Monte Ohrt <monte at ohrt dot com>
@@ -23,15 +23,17 @@ use \yii\base\Exception;
  * @return null|string
  * @throws Exception
  */
-function smarty_function_date_format($params, $template)
+function smarty_function_hlt_checkbox($params, $template)
 {
-    if (empty($params["format"]))
-        $format = "Y-m-d H:i:s";
+    if (empty($params["value"]))
+        $value = 0;
     else
-        $format = $params["format"];
+        $value = $params["value"];
 
-    if (empty($params["date"]))
-        throw new Exception('date参数错误');
-
-    return date($format, strtotime($params["date"]));
+    $text = '';
+    if ($value)
+        $text = '<img style="margin-bottom: -2px;" src="/images/sprite1.png">';
+    else
+        $text = '<img style="margin-bottom: -2px;" src="/images/sprite2.png">';
+    return $text;
 }
