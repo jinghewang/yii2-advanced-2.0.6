@@ -4,6 +4,7 @@ namespace api\models;
 
 use api\services\AccessTokenService;
 use common\helpers\BaseDataHelper;
+use common\helpers\DataHelper;
 use common\models\User;
 use api\services\ContractService;
 use Yii;
