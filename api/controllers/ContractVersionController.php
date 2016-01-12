@@ -2,10 +2,13 @@
 
 namespace api\controllers;
 
+use api\models\Chargeable;
 use api\models\Contract;
 use api\models\Group;
 use api\models\Organization;
 use api\models\Other;
+use api\models\Routes;
+use api\models\ShopAgreement;
 use api\models\Traveller;
 use common\helpers\ConfigHelper;
 use common\helpers\DataHelper;
@@ -145,6 +148,12 @@ class ContractVersionController extends Controller
         $otherGroup = json_decode($other->group,true);
         $effect = json_decode($other->effect,true);
 
+        $routes = Routes::find()->andWhere('contr_id=:contr_id and parentid=:parentid',[':contr_id'=>$ec->contr_id,':parentid'=>0])->all();
+        //自愿购物活动补充协议
+        $shops = ShopAgreement::find()->where("contr_id='{$ec->contr_id}'")->orderBy('index asc')->all();
+        //自愿参加另行付费旅游项目补充协议
+        $chargeables = Chargeable::find()->where("contr_id='{$ec->contr_id}'")->orderBy('index asc')->all();
+
         $data = [
             'contract' => $ec,//合同
             'version' => $version,//合同版本
@@ -152,6 +161,9 @@ class ContractVersionController extends Controller
             'group' => $group,//团信息
             'assigned' => $assigned,//签字代表
             'travellers' => $travellers,//人员名单
+            'routes' => $routes,//行程
+            'shops' => $shops,//自愿购物活动补充协议
+            'chargeables' => $chargeables,//自愿参加另行付费旅游项目补充协议
             'other'=>$other,
             'pay' => $pay,
             'insurance' => $insurance,
@@ -183,6 +195,7 @@ class ContractVersionController extends Controller
         //$pdf->output($htmlContent);
         return $pdf->render();
         //return $this->render('inside.tpl',$data);
+        //echo $htmlContent;
     }
 
 

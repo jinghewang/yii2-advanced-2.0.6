@@ -87,6 +87,13 @@ class Contract extends \yii\db\ActiveRecord
     const CONTRACT_AUDITSTATUS_NO='0';
 
 
+    public static  $ArrayPayment=array('1'=>'现金', '2'=>'支票', '3'=>'信用卡',);
+    public static  $ArrayPurchases=array('1'=>'委托旅行社购买', '2'=>'自行购买', '3'=>'放弃购买',);
+    public static  $ArrayGroup_Fail=array('0'=>'委托出团','1'=>'延期出团','2'=>'改签线路','3'=>'解除合同');
+    public static  $ArrayConciliation=array('1'=>'仲裁委员会','2'=>'人民法院');
+    public static  $ArrayIs_Fight=array('1'=>'同意','0'=>'不同意');
+
+
     /**
      * @return mixed
      */

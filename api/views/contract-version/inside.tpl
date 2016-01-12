@@ -309,7 +309,7 @@
             <p>第二十一条&emsp;旅游费用及支付（以人民币为计算单位）</p>
             <p>成人<u>&emsp;{$pay.numAdult}&emsp;</u>人、成人<u>&emsp;{$pay.payEachAdult}&emsp;</u>元/人、儿童（不满12岁）<u>&emsp;{$pay.numChild}&emsp;</u>人、儿童<u>&emsp;{$pay.payEachChild}&emsp;</u>元/人；</p>
             <p>旅游费用合计 ：<u>&emsp;{$pay.payTravel}&emsp;</u>元。</p>
-            <p>旅游费用支付方式 ：<u>&emsp;{$pay.payType}&emsp;</u></p>
+            <p>旅游费用支付方式 ：<u>&emsp;{hlt_enum type="payType" value=$pay.payType}&emsp;</u></p>
             <p>旅游费用支付时间 ：<u>&emsp;{$pay.payDeadline}&emsp;</u></p>
         </div>
         <div>
@@ -451,6 +451,7 @@
             </div>
         </div>
         {$PAGE_BREAK}
+        {*人员名单*}
         <div class="">
             <p class="file">附件1：</p>
             <div class="text-center font-heiti"><h3>旅行旅游报名表</h3></div>
@@ -458,28 +459,28 @@
             <div class="table-responsive">
                 <table class="table table-bordered rb-table-bordered">
                     <tr>
-                        <td class="text-center rb-th">序号</td>
-                        <td class="text-center rb-th">性别</td>
-                        <td class="text-center rb-th">年龄</td>
-                        <td class="text-center rb-th">国籍</td>
-                        <td class="text-center rb-th">旅行证件号</td>
-                        <td class="text-center rb-th">身份证号</td>
-                        <td class="text-center rb-th">本人联系电话</td>
-                        <td class="text-center rb-th">紧急联系电话</td>
-                        <td class="text-center rb-th">身体状况</td>
+                        <td class="text-center rb-th" width="12%">序号</td>
+                        <td class="text-center rb-th" width="8%">性别</td>
+                        <td class="text-center rb-th" width="12%">年龄</td>
+                        <td class="text-center rb-th" width="12%">国籍</td>
+                        <td class="text-center rb-th" width="12%">旅行证件号</td>
+                        <td class="text-center rb-th" width="12%">身份证号</td>
+                        <td class="text-center rb-th" width="14%">本人联系电话</td>
+                        <td class="text-center rb-th" width="10%">紧急联系电话</td>
+                        <td class="text-center rb-th" width="8%">身体状况</td>
                     </tr>
                     <tbody>
                     {foreach from=$travellers key=num item="member"}
                         <tr>
                             <td class="text-center rb-td">{$num+1}</td>
-                            <td class="text-center rb-td">{$member.sex}&nbsp;</td>
+                            <td class="text-center rb-td">{hlt_enum type="sex" value=$member.sex}&nbsp;</td>
                             <td class="text-center rb-td">{$member.birthday}&nbsp;</td>
                             <td class="text-center rb-td">{$member.nation}&nbsp;</td>
+                            <td class="text-center rb-td">&nbsp;</td>
                             <td class="text-center rb-td">{$member.idcode}&nbsp;</td>
-                            <td class="text-center rb-td">{$member.idcode}&nbsp;</td>
-                            <td class="text-center rb-td">{$member.idcode}&nbsp;</td>
-                            <td class="text-center rb-td">{$member.idcode}&nbsp;</td>
-                            <td class="text-center rb-td">{$member.idcode}&nbsp;</td>
+                            <td class="text-center rb-td">{$member.mobile}&nbsp;</td>
+                            <td class="text-center rb-td">&nbsp;</td>
+                            <td class="text-center rb-td">&nbsp;</td>
                         </tr>
                     {/foreach}
                     <tr>
@@ -520,8 +521,127 @@
              </div>
         </div>
         {$PAGE_BREAK}
+        {*团队行程*}
         <div class="">
             <p class="file">附件2：</p>
+            <div class="text-center font-heiti"><h3>团队行程</h3></div>
+            <table cellspacing="0" cellpadding="1" class="table table-bordered rb-table-bordered">
+                <tbody>
+                <tr class="ZTableTr">
+                    <td style="width:12%">团号</td>
+                    <td style="width:34%"><span>{$group.teamcode}</span></td>
+                    <td style="width:12%">出团日期</td>
+                    <td style="width:15%">{$group.bgndate}</td>
+                    <td style="width:12%">返回日期</td>
+                    <td style="width:15%">{$group.enddate}</td>
+                </tr>
+                <tr class="ZTableTr">
+                    <td>线路名称</td>
+                    <td colspan="5">{$group.linename}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table cellspacing="0" cellpadding="1" class="table table-bordered rb-table-bordered">
+                <tbody>
+                    {foreach from=$routes item="item" key="key"}
+                        {foreach from=$item.children item="subitem" key="subkey"}
+                            <tr class="ZTableTr">
+                                <td colspan="1" width="12%">天数</td>
+                                <td colspan="1" width="12%">{$key+1}</td>
+                                <td colspan="1" width="12%">站点</td>
+                                <td colspan="1" width="12%">{$subkey+1}</td>
+                                <td colspan="1" width="13%">前往地</td>
+                                <td colspan="1" width="13%">{$subitem.aim_city}</td>
+                                <td colspan="1" width="13%">前往省份/国家地区</td>
+                                <td colspan="1" width="13%">{$subitem.aim_country}</td>
+                            </tr>
+                            <tr class="ZTableTr">
+                                <td colspan="1">游览行程</td>
+                                <td colspan="7">
+                                    <div class="userDiv">
+                                        {$subitem.signText.content}
+                                    </div>
+                                </td>
+                            </tr>
+                        {/foreach}
+                    {/foreach}
+                </tbody>
+            </table>
+        </div>
+
+        {*自愿购物活动补充协议*}
+        <div class="">
+            <p class="file">附件3：</p>
+            <div class="text-center font-heiti"><h3>自愿购物活动补充协议</h3></div>
+            <div class="table-responsive">
+                <table class="table table-bordered rb-table-bordered">
+                    <tr class="">
+                        <td class="text-center rb-th" width="8%">序号</td>
+                        <td class="text-center rb-th" width="14%">具体时间</td>
+                        <td class="text-center rb-th" width="10%">地点</td>
+                        <td class="text-center rb-th" width="10%">购物场所名称</td>
+                        <td class="text-center rb-th" width="10%">主要商品信息</td>
+                        <td class="text-center rb-th" width="12%">最长停留时间（分钟）</td>
+                        <td class="text-center rb-th">其他说明</td>
+                        <td class="text-center rb-th" width="10%">旅游者签名同意</td>
+                    </tr>
+                    <tbody>
+                    {foreach from=$shops key=num item="shop"}
+                        <tr>
+                            <td class="text-center rb-td">{$shop.index}</td>
+                            <td class="text-center rb-td">{$shop.time}&nbsp;</td>
+                            <td class="text-center rb-td">{$shop.addr}&nbsp;</td>
+                            <td class="text-center rb-td">{$shop.name}&nbsp;</td>
+                            <td class="text-center rb-td">{$shop.goods}&nbsp;</td>
+                            <td class="text-center rb-td">{$shop.duration}&nbsp;</td>
+                            <td class="text-center rb-td">{$shop.memo}&nbsp;</td>
+                            <td class="text-center rb-td">{hlt_result value=$shop.agree}&nbsp;</td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {$PAGE_BREAK}
+        {*自愿参加另行付费旅游项目补充协议*}
+        <div class="">
+            <p class="file">附件4：</p>
+            <div class="text-center font-heiti"><h3>自愿参加另行付费旅游项目补充协议</h3></div>
+            <div class="table-responsive">
+                <table class="table table-bordered rb-table-bordered">
+                    <tr class="">
+                        <td class="text-center rb-th" width="8%">序号</td>
+                        <td class="text-center rb-th" width="14%">具体时间</td>
+                        <td class="text-center rb-th" width="10%">地点</td>
+                        <td class="text-center rb-th" width="10%">项目名称和内容</td>
+                        <td class="text-center rb-th" width="10%">费用（元）</td>
+                        <td class="text-center rb-th" width="12%">项目时长（分钟）</td>
+                        <td class="text-center rb-th">其他说明</td>
+                        <td class="text-center rb-th" width="10%">旅游者签名同意</td>
+                    </tr>
+                    <tbody>
+                    {foreach from=$chargeables key=num item="shop"}
+                        <tr>
+                            <td class="text-center rb-td">{$shop.index}</td>
+                            <td class="text-center rb-td">{$shop.time}&nbsp;</td>
+                            <td class="text-center rb-td">{$shop.addr}&nbsp;</td>
+                            <td class="text-center rb-td">{$shop.name}&nbsp;</td>
+                            <td class="text-center rb-td">{$shop.price}&nbsp;</td>
+                            <td class="text-center rb-td">{$shop.duration}&nbsp;</td>
+                            <td class="text-center rb-td">{$shop.memo}&nbsp;</td>
+                            <td class="text-center rb-td">{hlt_result value=$shop.agree}&nbsp;</td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {$PAGE_BREAK}
+
+        {*参团须知及安全提示告知书*}
+        <div class="">
+            <p class="file">附件5：</p>
             <div class="text-center font-heiti">
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">

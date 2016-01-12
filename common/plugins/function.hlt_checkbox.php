@@ -25,13 +25,11 @@ use \yii\base\Exception;
  */
 function smarty_function_hlt_checkbox($params, $template)
 {
-    if (empty($params["value"]))
-        $value = 0;
-    else
-        $value = $params["value"];
+    $value = empty($params["value"]) ? 0 : $params["value"];
+    $cmp = empty($params["cmp"]) ? 1 : $params["cmp"];
 
     $text = '';
-    if ($value)
+    if ($value == $cmp)
         $text = '<img style="margin-bottom: -2px;" src="/images/sprite1.png">';
     else
         $text = '<img style="margin-bottom: -2px;" src="/images/sprite2.png">';

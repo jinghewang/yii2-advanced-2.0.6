@@ -19,6 +19,9 @@ use Yii;
  * @property string $aim_country
  * @property string $sign
  * @property string $extra_data
+ *
+ * @property Routes[] $children
+ * @property Text $signText
  */
 class Routes extends \yii\db\ActiveRecord
 {
@@ -28,6 +31,16 @@ class Routes extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'routes';
+    }
+
+    public function getChildren()
+    {
+        return $this->hasMany('api\models\Routes', ['parentid' => 'id']);
+    }
+
+    public function getSignText()
+    {
+        return $this->hasOne('api\models\Text', ['sign' => 'sign']);
     }
 
     /**

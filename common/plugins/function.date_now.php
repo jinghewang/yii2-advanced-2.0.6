@@ -24,7 +24,7 @@
 function smarty_function_date_now($params, $template)
 {
     if(empty($params["format"])) {
-        $format = "Y-m-d H:i:s";
+        $format = "Y年m月d日";//2016年01月07日
     } else {
         $format = $params["format"];
     }
