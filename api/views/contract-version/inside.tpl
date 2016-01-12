@@ -318,10 +318,10 @@
                 <li>旅行社提示旅游者购买人身意外伤害保险；</li>
                 <li>旅游者可以做以下选择：</li>
                 <ol class="list-unstyled">
-                    <li>{if $insurance.purchases eq '1'}<img style="margin-bottom: -2px;" src="/images/sprite1.png">{else}<img style="margin-bottom: -2px;" src="/images/sprite2.png">{/if}委托旅行社购买 （旅行社不具有保险兼业代理资格的，不得勾选此项）：</li>
+                    <li>{hlt_checkbox value=$insurance.purchases}委托旅行社购买 （旅行社不具有保险兼业代理资格的，不得勾选此项）：</li>
                     <li>保险产品名称<u>&emsp;{$insurance.insurance}&emsp;</u>投保的相关信息以实际保单为准）；</li>
-                    <li>{if $insurance.purchases eq '2'}<img style="margin-bottom: -2px;" src="/images/sprite1.png">{else}<img style="margin-bottom: -2px;" src="/images/sprite2.png">{/if}自行购买；</li>
-                    <li>{if $insurance.purchases eq '3'}<img style="margin-bottom: -2px;" src="/images/sprite1.png">{else}<img style="margin-bottom: -2px;" src="/images/sprite2.png">{/if}放弃购买。</li>
+                    <li>{hlt_checkbox value=$insurance.purchases cmp=2}自行购买；</li>
+                    <li>{hlt_checkbox value=$insurance.purchases cmp=3}放弃购买。</li>
                 </ol>
             </ol>
         </div>
@@ -331,17 +331,17 @@
                 <li>成团的最低人数：<u>&emsp;{$group.personLimit}&emsp;</u>人。</li>
                 <li>如不能成团，旅游者是否同意按下列方式解决：</li>
                 <ol>
-                    <li><u>&emsp;{if $otherGroup.transAgree eq '1'}同意{else}不同意{/if}&emsp;</u>（同意或者不同意，打勾无效）旅行社委托<u>&emsp;{$otherGroup.transAgency}</u>旅行社履行合同；</li>
-                    <li><u>&emsp;{if $otherGroup.delayAgree eq '1'}同意{else}不同意{/if}&emsp;</u>（同意或者不同意，打勾无效）延期出团；</li>
-                    <li><u>&emsp;{if $otherGroup.changeLineAgree eq '1'}同意{else}不同意{/if}&emsp;</u>（同意或者不同意，打勾无效）改签其他线路出团；</li>
-                    <li><u>&emsp;{if $otherGroup.terminateAgree eq '1'}同意{else}不同意{/if}&emsp;</u>同意或者不同意，打勾无效）解除合同。</li>
+                    <li><u>&emsp;{hlt_result value=$otherGroup.transAgree}&emsp;</u>（同意或者不同意，打勾无效）旅行社委托<u>&emsp;{$otherGroup.transAgency}</u>旅行社履行合同；</li>
+                    <li><u>&emsp;{hlt_result value=$otherGroup.delayAgree}&emsp;</u>（同意或者不同意，打勾无效）延期出团；</li>
+                    <li><u>&emsp;{hlt_result value=$otherGroup.changeLineAgree}&emsp;</u>（同意或者不同意，打勾无效）改签其他线路出团；</li>
+                    <li><u>&emsp;{hlt_result value=$otherGroup.terminateAgree}&emsp;</u>同意或者不同意，打勾无效）解除合同。</li>
                 </ol>
             </ol>
         </div>
         <div>
             <p>第二十四条&emsp;拼团约定</p>
             <ol class="list-unstyled">
-                <li>旅游者<u>&emsp;{if $otherGroup.mergeAgree eq '1'}同意{else}不同意{/if}&emsp;</u>（同意或者不同意，打勾无效）采用拼团方式出团。</li>
+                <li>旅游者<u>&emsp;{hlt_result value=$otherGroup.mergeAgree}&emsp;</u>（同意或者不同意，打勾无效）采用拼团方式出团。</li>
                 <li>委托/接待社名称：<u>&emsp;{$otherGroup.mergeAgency}&emsp;</u></li>
             </ol>
         </div>
@@ -512,10 +512,10 @@
             </div>
              <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6 rb-md-6">
-                        旅游者(或代表)签字：
+                        旅游者(或代表)签字：{$assigned.name}
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 text-right rb-md-6">
-                        2016年01月07日
+                        {date_now}
                     </div>
              </div>
         </div>
